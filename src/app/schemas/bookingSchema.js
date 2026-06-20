@@ -38,8 +38,8 @@ export const createBookingSchema = (availableTimeSlots = []) =>
 
     numberOfGuests: z.coerce
       .number()
-      .int()
-      .min(1)
+      .int("Must be a whole number")
+      .min(1, "Minimum 1 guest required")
       .max(10, "Number of Guests must be less than or equal to 10"),
 
     timeSlot: z

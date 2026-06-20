@@ -7,8 +7,7 @@ import styles from "./ErrorMessage.module.css";
  *  - Renders nothing (null) when there is no message.
  */
 const ErrorMessage = ({ message }) => {
-  if(!message) return null;
-  return <p className={styles.errorMessage}>{message}</p>;
+  return message ? <p className={styles.errorMessage}>{message}</p> : null;
 };
 
 export default ErrorMessage;
