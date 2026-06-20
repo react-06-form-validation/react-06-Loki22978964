@@ -44,6 +44,7 @@ export const createBookingSchema = (availableTimeSlots = []) =>
 
     timeSlot: z
       .string()
+      .min(1, "Selected time slot is unavailable")
       .refine((e) => availableTimeSlots.includes(e), {
         message: "Selected time slot is unavailable",
       }),
