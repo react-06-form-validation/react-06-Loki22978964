@@ -140,10 +140,10 @@ export default function BookingForm() {
             </option>
           ))}
         </select>
-        
+
         {isLoading && <p>Loading time slots...</p>}
         {error && <p className={styles.error}>{error}</p>}
-        {!isLoading && !error && timeSlots === 0 && <p>No time slots available.</p>}
+        {!isLoading && !error && timeSlots.length === 0 && <p>No time slots available.</p>}
 
         <ErrorMessage message={errors.timeSlot?.message} />
       </div>
