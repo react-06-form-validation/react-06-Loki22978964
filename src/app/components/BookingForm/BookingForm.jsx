@@ -7,7 +7,6 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { createBookingSchema } from '../../schemas/bookingSchema';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import styles from './BookingForm.module.css';
-import { date } from 'zod';
 
 export default function BookingForm() {
   const [timeSlots, setTimeSlots] = useState([]);
@@ -28,12 +27,12 @@ export default function BookingForm() {
       }
     })
     .catch((error) =>{
-      console.log();
+      console.error('Failed to fetch time slots:', error);
       setIsLoading(false);
     });
 
     return () => {
-      isMounted = false;
+      isMounted = false; 
     };
 
   }, []);
