@@ -23,6 +23,10 @@ export default function BookingForm() {
     fetch("/api/time-slots")
       .then((res) => res.json())
       .then((date) => {
+        if (!Array.isArray(data)) {
+          throw new Error("Invalid API response format");
+        }
+
         if (isMounted) {
           setTimeSlots(date);
           setIsLoading(false);
@@ -32,7 +36,7 @@ export default function BookingForm() {
         if (isMounted) {
           console.error("Failed to fetch time slots:", error);
           setIsLoading(false);
-          setError('Failed to load time slots. Please try again.');
+          setError("Failed to load time slots. Please try again.");
         }
       });
 
@@ -55,6 +59,7 @@ export default function BookingForm() {
 
   const onSubmit = (data) => {
     // TODO: on successful submit, show `alert('Booking successful!')` as described in README.md → "Components".
+    console.log("Booking data:", data);
     alert("Booking successful!");
   };
 
@@ -142,8 +147,10 @@ export default function BookingForm() {
         </select>
 
         {isLoading && <p>Loading time slots...</p>}
-        {error && <p className={styles.error}>{error}</p>}
-        {!isLoading && !error && timeSlots.length === 0 && <p>No time slots available.</p>}
+        {error && <p className={styles.errorMessage}>{error}</p>}
+        {!isLoading && !error && timeSlots.length === 0 && (
+          <p>No time slots available.</p>
+        )}
 
         <ErrorMessage message={errors.timeSlot?.message} />
       </div>
@@ -161,7 +168,7 @@ export default function BookingForm() {
         <ErrorMessage message={errors.eventLink?.message} />
       </div>
 
-      <button className={styles.button} type="submit">
+      <button className={styles.button} type="submit" disabled={isLoading}>
         Book Event
       </button>
     </form>
