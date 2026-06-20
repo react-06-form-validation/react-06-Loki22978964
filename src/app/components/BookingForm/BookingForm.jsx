@@ -23,7 +23,7 @@ export default function BookingForm() {
     fetch("/api/time-slots")
       .then((res) => res.json())
       .then((date) => {
-        if (!Array.isArray(data)) {
+        if (!Array.isArray(date)) {
           throw new Error("Invalid API response format");
         }
 
